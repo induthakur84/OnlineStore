@@ -1,4 +1,4 @@
-﻿namespace Order.Domain
+﻿namespace Order.DTO
 {
     public class Class1
     {

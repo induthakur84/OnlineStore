@@ -1,4 +1,4 @@
-﻿namespace Order.Data
+﻿namespace ProjectCommonCode
 {
     public class Class1
     {
