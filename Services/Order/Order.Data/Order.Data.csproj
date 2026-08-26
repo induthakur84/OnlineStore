@@ -17,8 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\ProjectCommonCode\ProjectCommonCode.csproj" />
     <ProjectReference Include="..\..\..\Order.DTO\Order.DTO.csproj" />
     <ProjectReference Include="..\Order.Domain\Order.Domain.csproj" />
+    <ProjectReference Include="..\Order.DTO\Order.DTO.csproj" />
   </ItemGroup>
 
 </Project>

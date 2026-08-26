@@ -3,10 +3,10 @@ using Order.Domain;
 
 namespace Order.Data.Context
 {
-    public class ApplicationDbContext : DbContext
+    public class OrderDbContext : DbContext
     {
-        public ApplicationDbContext(
-            DbContextOptions<ApplicationDbContext> options)
+        public OrderDbContext(
+            DbContextOptions<OrderDbContext> options)
             : base(options)
         {
         }
