@@ -1,14 +1,12 @@
-﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Order.Data;
 using Order.DTO.Request;
 using Order.DTO.Response;
 using ProjectCommonCode;
 
-namespace Order.API.Controllers.V1
+namespace Order.API.Controllers.V2
 {
-    [ApiVersion("1.0")]
-    [Route("api/v{version:ApiVersion}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -41,7 +39,13 @@ namespace Order.API.Controllers.V1
             )
         {
             var users= await _userInterface.GetAll(pageNumber,PageSize,search,sortBy,sortOrder);
-            return Ok(users);
+            var response = new
+            {
+                Users = users,
+                IsActive = false,
+                abc = false
+            };
+            return Ok(response);
         }
         [HttpGet("{id}")]
         public async Task <ActionResult<UserResponse>>GetById(int id)
