@@ -5,11 +5,6 @@ using Order.Domain;
 using Order.DTO.Request;
 using Order.DTO.Response;
 using ProjectCommonCode;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Order.Data.Services
 {

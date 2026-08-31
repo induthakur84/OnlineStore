@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\ProjectCommonCode\ProjectCommonCode.csproj" />
     <ProjectReference Include="..\..\..\ProjectCommonCode\ProjectCommonCode.csproj" />
+    <ProjectReference Include="..\Order.Data\Order.Data.csproj" />
   </ItemGroup>
 
 </Project>
