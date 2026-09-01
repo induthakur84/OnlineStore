@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Order.Data;
@@ -9,61 +10,79 @@ using ProjectCommonCode;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Database
 builder.Services.AddDbContext<OrderDbContext>(options =>
- options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add services to the container.
+// Services
 builder.Services.AddScoped<IUserInterface, UserService>();
+
+// AutoMapper
 builder.Services.AddAutoMapper(typeof(UserMapping));
+
+// Controllers
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// API Explorer
 builder.Services.AddEndpointsApiExplorer();
 
+
+// API Versioning
 builder.Services.AddApiVersioning(options =>
 {
-
-    //Default version to use when client does specify one
+    // Default API version
     options.DefaultApiVersion = new ApiVersion(1, 0);
 
+    // Use v1 if client doesn't specify version
     options.AssumeDefaultVersionWhenUnspecified = true;
 
+    // Return supported/deprecated versions in response headers
     options.ReportApiVersions = true;
 
+    // Support multiple ways of specifying API version
     options.ApiVersionReader = ApiVersionReader.Combine(
-        new UrlSegmentApiVersionReader(),//api/v1/user, //api/v1/user
-
+        new UrlSegmentApiVersionReader(),
         new QueryStringApiVersionReader("api-version"),
         new HeaderApiVersionReader("X-Version")
     );
 })
 .AddApiExplorer(options =>
 {
-
-    //Format of api versioing (e.g 'v1', 'v3'
+    // v1, v2, v3
     options.GroupNameFormat = "'v'VVV";
 
+    // Replace {version} in URL with actual version
     options.SubstituteApiVersionInUrl = true;
-
-
 });
-//here we can register the swagger configuration options helper we 
 
 
-
-
+// Swagger
 builder.Services.AddSwaggerGen();
 
+// Register Swagger configuration
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+// Swagger
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    var provider =
+        app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        options.SwaggerEndpoint(
+            $"/swagger/{description.GroupName}/swagger.json",
+            $"Order API {description.GroupName.ToUpperInvariant()}");
+    }
+});
+
 
 app.UseHttpsRedirection();
 
