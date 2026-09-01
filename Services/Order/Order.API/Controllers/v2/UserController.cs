@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using Order.Data;
 using Order.DTO.Request;
 using Order.DTO.Response;
@@ -6,7 +7,8 @@ using ProjectCommonCode;
 
 namespace Order.API.Controllers.V2
 {
-    [Route("api/[controller]")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -18,7 +20,7 @@ namespace Order.API.Controllers.V2
 
         [HttpPost]
 
-        public async Task<ActionResult<UserRequest>> Create(UserRequest userRequest)
+        public async Task<ActionResult<UserResponse>> Create(UserRequest userRequest)
         {
             if (userRequest == null)
             {

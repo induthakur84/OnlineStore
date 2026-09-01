@@ -29,7 +29,7 @@ namespace Order.Data.Services
             var userEntity= _mapper.Map<User>(request);
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();
-            return _mapper.Map<UserResponse>(request);
+            return _mapper.Map<UserResponse>(userEntity);
 
         }
 

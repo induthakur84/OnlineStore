@@ -10,6 +10,8 @@ namespace Order.Data.Automapper
         public UserMapping() {
         
             CreateMap<User, UserResponse>().ReverseMap();
+
+            // CreateMap<UserRequest, UserResponse>().ReverseMap();
             CreateMap<UserRequest, User>().ReverseMap();
         }
     }

@@ -8,7 +8,7 @@ using ProjectCommonCode;
 namespace Order.API.Controllers.V1
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:ApiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace Order.API.Controllers.V1
 
         [HttpPost]
 
-        public async Task<ActionResult<UserRequest>> Create(UserRequest userRequest)
+        public async Task<ActionResult<UserResponse>> Create(UserRequest userRequest)
         {
             if (userRequest == null)
             {
