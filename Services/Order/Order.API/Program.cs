@@ -16,7 +16,9 @@ builder.Services.AddDbContext<OrderDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Services
-builder.Services.AddScoped<IUserInterface, UserService>();
+
+builder.Services.RegisterServices(typeof(UserService).Assembly.FullName);
+
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(UserMapping));

@@ -2,9 +2,14 @@
 using Order.DTO.Request;
 using Order.DTO.Response;
 using ProjectCommonCode;
+using static ProjectCommonCode.RegisterDependencyAttribute;
 
 namespace Order.Data
 {
+    
+
+
+    [RegisterScoped]
     public interface IUserInterface
     {
         Task<UserResponse> Create(UserRequest request);
