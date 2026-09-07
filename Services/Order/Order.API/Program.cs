@@ -2,7 +2,6 @@ using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Order.Data;
 using Order.Data.Automapper;
 using Order.Data.Context;
 using Order.Data.Services;
