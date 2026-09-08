@@ -1,4 +1,4 @@
-namespace Order.UnitTest
+namespace store.testcase
 {
     public class UnitTest1
     {
